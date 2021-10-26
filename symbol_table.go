@@ -51,6 +51,7 @@ func (t *SymbolTable) Define(name string) *Symbol {
 			for p.parent != nil {
 				p = p.parent
 			}
+			// 到这里 p.parent = nil, p就是根
 			t.numDefinition--
 			p.numDefinition++
 		}

@@ -90,15 +90,15 @@ func (s *Script) EnableFileImport(enable bool) {
 // Compile compiles the script with all the defined variables, and, returns
 // Compiled object.
 func (s *Script) Compile() (*Compiled, error) {
-	symbolTable, globals, err := s.prepCompile()
+	symbolTable, globals, err := s.prepCompile() // 符号表（加载内置函数，以及用户自定义变量），values数组
 	if err != nil {
 		return nil, err
 	}
 
 	fileSet := parser.NewFileSet()
-	srcFile := fileSet.AddFile("(main)", -1, len(s.input))
+	srcFile := fileSet.AddFile("(main)", -1, len(s.input)) // 来一个(main)来承接 输入的[]byte数组
 	p := parser.NewParser(srcFile, s.input, nil)
-	file, err := p.ParseFile()
+	file, err := p.ParseFile() // 这里是解析的重点！！会把整棵树给解析出来，左值，右值
 	if err != nil {
 		return nil, err
 	}

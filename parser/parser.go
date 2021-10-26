@@ -142,7 +142,7 @@ func (p *Parser) ParseFile() (file *File, err error) {
 		return nil, p.errors.Err()
 	}
 
-	stmts := p.parseStmtList()
+	stmts := p.parseStmtList() // 解析表达式，最难的地方来喽！
 	if p.errors.Len() > 0 {
 		return nil, p.errors.Err()
 	}
